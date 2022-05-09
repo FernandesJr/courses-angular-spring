@@ -1,6 +1,7 @@
 import { Course } from './model/course';
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../services/courses.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-courses',
@@ -9,7 +10,7 @@ import { CoursesService } from '../services/courses.service';
 })
 export class CoursesComponent implements OnInit {
 
-  courses: Course[] = []; //Lista que será iterada na tabela do html
+  courses: Observable<Course[]>; //Lista que será iterada na tabela do html
   displayedColumns = ['name', 'category']; //Colunas que têm declaradas na tabela
 
   //Injetando class via construtor
