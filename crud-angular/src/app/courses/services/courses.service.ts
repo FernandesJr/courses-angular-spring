@@ -1,7 +1,7 @@
 import { Course } from './../courses/model/course';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; //Lembrando que necessita ser importado no modulo do app
-import { first, tap } from 'rxjs';
+import { delay, first, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,7 @@ export class CoursesService {
   list() {
     return this.httpClient.get<Course[]>(this.API)
     .pipe(
+      delay(5000), //Delay para mostrar o spinner 'carregando'
       first(), //Para não manter uma conecxão permanente
       tap(courses => console.log(courses))//Manipular dados antes de enviar
     );

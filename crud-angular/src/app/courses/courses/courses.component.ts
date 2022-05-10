@@ -10,12 +10,12 @@ import { Observable } from 'rxjs';
 })
 export class CoursesComponent implements OnInit {
 
-  courses: Observable<Course[]>; //Lista que será iterada na tabela do html
+  courses$: Observable<Course[]>; //Lista que será iterada na tabela do html, o $ é informando que o objeto é um Observable
   displayedColumns = ['name', 'category']; //Colunas que têm declaradas na tabela
 
   //Injetando class via construtor
   constructor(private coursesService: CoursesService) {
-    this.courses = this.coursesService.list();
+    this.courses$ = this.coursesService.list();
   }
 
   ngOnInit(): void {
