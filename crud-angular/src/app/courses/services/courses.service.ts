@@ -16,7 +16,7 @@ export class CoursesService {
   list() {
     return this.httpClient.get<Course[]>(this.API)
     .pipe(
-      delay(5000), //Delay para mostrar o spinner 'carregando'
+      delay(3000), //Delay para mostrar o spinner 'carregando'
       first(), //Para não manter uma conecxão permanente
       tap(courses => console.log(courses))//Manipular dados antes de enviar
     );

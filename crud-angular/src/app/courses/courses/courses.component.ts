@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from './model/course';
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../services/courses.service';
@@ -13,12 +14,14 @@ import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/err
 export class CoursesComponent implements OnInit {
 
   courses$: Observable<Course[]>; //Lista que será iterada na tabela do html, o $ é informando que o objeto é um Observable
-  displayedColumns = ['name', 'category']; //Colunas que têm declaradas na tabela
+  displayedColumns = ['name', 'category', 'actions']; //Colunas que têm declaradas na tabela
 
   //Injetando class via construtor
   constructor(
     private coursesService: CoursesService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute //Referência a rota atual em que se encontra
     ) {
     this.courses$ = this.coursesService.list().pipe(
       catchError(error => {
@@ -36,6 +39,11 @@ export class CoursesComponent implements OnInit {
     this.dialog.open(ErrorDialogComponent, {
       data: errorMsg
     });
+  }
+
+  onAdd() {
+    this.router.navigate(["new"], {relativeTo: this.route}); //navegando nas rotas
+    //O relative é opcional, ele indica a rota atual, isso ajuda no caso de uma possível troca de nome da rota. Caso colocasse /courses/new em todos os lugares que a rota fosse chamada teria que vir e alterar.
   }
 
 }
