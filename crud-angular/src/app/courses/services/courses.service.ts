@@ -21,4 +21,9 @@ export class CoursesService {
       tap(courses => console.log(courses))//Manipular dados antes de enviar
     );
   }
+
+  save(course: Course) {
+    console.log("salvar course: " + course.name);
+    // return this.httpClient.post<Course>(this.API, course).pipe(first());
+  }
 }
